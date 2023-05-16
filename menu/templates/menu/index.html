@@ -1,0 +1,29 @@
+{% load static %}
+
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'menu/style.css' %}">
+    <title>Our pizzas</title>
+</head>
+<body>
+<a href="{% url 'main:index' %}"><img id="small_logo" src="{% static 'menu/images/small_logo.png' %}"/></a>
+    <div class="menu_title">
+        <h1>Our Pizzas</h1>
+    </div>
+    <div class="menu_list">
+        {% for pizza in pizzas %}
+            <div class="menu_list_item">
+                <span class="menu_list_title">{{pizza.name}}</span>
+                <span class="menu_list_price">${{pizza.price | floatformat:2}}</span>
+                <br>
+                <span class="menu_list_ingredients">{{pizza.ingredients}}</span>
+                {% if pizza.vegetarian %}
+                  <br>
+                  <span class="menu_list_badge">VEGETARIAN</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
